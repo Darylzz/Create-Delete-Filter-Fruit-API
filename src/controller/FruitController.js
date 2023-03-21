@@ -57,3 +57,18 @@ exports.getFruitListByName = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.deleteFruitList = async (req, res, next) => {
+  try {
+    const fruitList = await FruitList.findOne({
+      where: {
+        id: req.params.fruitListId
+      }
+    });
+    console.log(fruitList);
+    await fruitList.destroy();
+    res.status(200).json(fruitList);
+  } catch (err) {
+    next(err);
+  }
+};
